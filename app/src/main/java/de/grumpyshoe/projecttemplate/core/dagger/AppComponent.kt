@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(AndroidModule::class, RepositoryModule::class))
 interface AppComponent {
 
-    // base
+    // core
     fun inject(view: GithubService)
     fun inject(view: SQliteService)
     fun inject(view: RepositoryManager)

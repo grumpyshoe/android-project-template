@@ -7,7 +7,12 @@ android {
     compileSdkVersion compileSdk
 
     dataBinding {
-        enabled = true
+        enabled true
+        addDefaultAdapters true
+    }
+
+    kapt {
+        generateStubs = true
     }
 
     defaultConfig {

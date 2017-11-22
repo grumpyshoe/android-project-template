@@ -39,7 +39,6 @@ allprojects {
                 "runner"                  : ("com.android.support.test:runner:1.0.1"),
                 "espresso_core"           : ("com.android.support.test.espresso:espresso-core:3.0.1"),
                 "mockito_core"            : ("org.mockito:mockito-core:1.10.19"),
-                "mockito_core"            : ("org.mockito:mockito-core:1.10.19"),
 
                 // android
                 "support_contraint_layout": ("com.android.support.constraint:constraint-layout:1.0.2"),

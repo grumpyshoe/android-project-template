@@ -14,19 +14,89 @@
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onRefreshListener="@{viewmodel.onRefreshListener}"
         android:background="#000"
+        android:onRefreshListener="@{viewmodel.onRefreshListener}"
         android:setRefreshing="@{viewmodel.isLoading()}">
 
-            <TextView
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/owner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#555"
+                android:hint="@string/owner"
+                android:padding="8dp"
+                android:text="@={viewmodel.owner}"
+                android:textColor="#fff"
+                android:textColorHint="#888"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+            <EditText
+                android:id="@+id/repo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#555"
+                android:hint="@string/repo"
+                android:padding="8dp"
+                android:text="@={viewmodel.repo}"
+                android:textColor="#fff"
+                android:textColorHint="#888"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/owner"/>
+
+            <Button
+                android:id="@+id/load_contributors"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#000"
+                android:onClick="@{() -> viewmodel.onBtnClick()}"
+                android:padding="8dp"
+                android:text="@string/load_contributors"
+                android:textColor="#eee"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/repo"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="326dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="@{viewmodel.contributors}"
-                android:visibility="@{!viewmodel.isLoading}"
                 android:textColor="#eee"
+                android:visibility="@{!viewmodel.isLoading}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/load_contributors"
+                app:layout_constraintVertical_bias="1.0"
                 tools:text="layout design dummy text"/>
+
+        </android.support.constraint.ConstraintLayout>
+
 
     </android.support.v4.widget.SwipeRefreshLayout>
 </layout>

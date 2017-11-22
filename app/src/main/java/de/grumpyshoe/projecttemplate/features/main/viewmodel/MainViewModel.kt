@@ -21,6 +21,8 @@ class MainViewModel : BaseObservable() {
 
     @Inject lateinit var repositoryManager: RepositoryManager
     val contributors = ObservableField<String>()
+    val owner = ObservableField<String>("grumpyshoe")
+    val repo = ObservableField<String>("android-project-template")
     val isLoading = ObservableBoolean(false)
 
     /**
@@ -30,8 +32,7 @@ class MainViewModel : BaseObservable() {
     init {
         Injector.INSTANCE.get().inject(this)
 
-        dummyMethod()
-
+        loadContributors()
     }
 
 
@@ -39,11 +40,11 @@ class MainViewModel : BaseObservable() {
      * just a dummy method to show how to use RepositoryManager
      *
      */
-    private fun dummyMethod() {
+    private fun loadContributors(isRefresh : Boolean = false) {
 
         isLoading.set(true)
 
-        repositoryManager.geContributors(object : Callback<List<Contributor>> {
+        repositoryManager.getContributors(owner.get(), repo.get(), isRefresh, object : Callback<List<Contributor>> {
 
             override fun onResult(result: List<Contributor>) {
                 onSuccessResult(result)
@@ -63,20 +64,20 @@ class MainViewModel : BaseObservable() {
      */
     val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
 
-        isLoading.set(true)
+        loadContributors(true)
 
-        repositoryManager.refreshContributors(object : Callback<List<Contributor>> {
-
-            override fun onResult(result: List<Contributor>) {
-                onSuccessResult(result)
-            }
-
-            override fun onError(throwable: Throwable?, code: Int, errorBody: ResponseBody?) {
-                onErrorResult(throwable, code, errorBody)
-            }
-
-        })
     }
+
+
+    /**
+     * just a dummy method to show how to bind a action to onClick in xml
+     *
+     */
+    fun onBtnClick() {
+
+        loadContributors(true)
+    }
+
 
 
     /**
@@ -95,7 +96,7 @@ class MainViewModel : BaseObservable() {
      *
      */
     internal fun onErrorResult(throwable: Throwable?, code: Int, errorBody: ResponseBody?) {
-        contributors.set(errorBody?.string())
+        contributors.set("HTTP CODE : " + code.toString() + " - " + errorBody?.string())
         isLoading.set(false)
         Log.e("RESULT", "ERROR:  HTTP_CODE:" + code.toString() + " " + contributors.get())
     }
