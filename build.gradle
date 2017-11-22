@@ -1,0 +1,78 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.1.60'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    ext {
+
+        // base config
+        compileSdk = 26
+        minSdk = 16
+        targetSdk = 26
+        code = 1
+        name = "1.0"
+        dagger = '2.12'
+
+        // libraries
+        libs = [
+                // Test
+                "junit"                   : ("junit:junit:4.12"),
+                "runner"                  : ("com.android.support.test:runner:1.0.1"),
+                "espresso_core"           : ("com.android.support.test.espresso:espresso-core:3.0.1"),
+                "mockito_core"            : ("org.mockito:mockito-core:1.10.19"),
+                "mockito_core"            : ("org.mockito:mockito-core:1.10.19"),
+
+                // android
+                "support_contraint_layout": ("com.android.support.constraint:constraint-layout:1.0.2"),
+                "support_appcompatv7"     : ("com.android.support:appcompat-v7:26.1.0"),
+
+                // dagger2
+                "dagger"                  : ("com.google.dagger:dagger:$dagger"),
+                "daggerCompiler"          : ("com.google.dagger:dagger-compiler:$dagger"),
+
+                // rx
+                "rxandroid"               : ("io.reactivex.rxjava2:rxandroid:2.0.1"),
+                "rxjava"                  : ("io.reactivex.rxjava2:rxjava:2.1.6"),
+
+                // retrofit
+                "retrofit"                : ("com.squareup.retrofit2:retrofit:2.0.2"),
+                "retrofit_converter_moshi": ("com.squareup.retrofit2:converter-moshi:2.0.0"),
+
+                // room
+                "room"                    : ("android.arch.persistence.room:runtime:1.0.0"),
+                "room_compiler"           : ("android.arch.persistence.room:compiler:1.0.0"),
+
+                // other
+                "anko"                    : ("org.jetbrains.anko:anko-common:0.10.1"),
+                "recyclerview"            : ("com.android.support:recyclerview-v7:26.1.0"),
+
+                // databinding
+                "databinding_compiler"    : ("com.android.databinding:compiler:3.0.0"),
+
+
+        ]
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

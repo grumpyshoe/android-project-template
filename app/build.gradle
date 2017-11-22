@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion compileSdk
+
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        applicationId "de.grumpyshoe.projecttemplate"
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode code
+        versionName name
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    kapt libs.daggerCompiler
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation libs.support_appcompatv7
+    implementation libs.support_contraint_layout
+    implementation libs.dagger
+    implementation libs.rxandroid
+    implementation libs.rxjava
+    implementation libs.retrofit
+    implementation libs.retrofit_converter_moshi
+    implementation libs.room
+    implementation libs.anko
+    implementation libs.recyclerview
+    kapt libs.room_compiler
+    kapt libs.databinding_compiler
+    testImplementation libs.junit
+    testImplementation libs.runner
+    testImplementation libs.mockito_core
+    androidTestImplementation libs.runner
+    androidTestImplementation libs.espresso_core
+    //    implementation "android.arch.lifecycle:extensions:1.0.0"
+}
